@@ -4,7 +4,6 @@ import SelectInput from '../components/SelectInput';
 import Button from '../components/Button';
 import { categories, difficulties, types, times } from '../config/quizConfigData';
 
-
 interface QuizConfigState {
   numQuestions: number;
   category: string;
@@ -20,30 +19,29 @@ type QuizConfigAction =
   | { type: 'SET_TYPE'; payload: string }
   | { type: 'SET_TIME'; payload: string };
 
-  const quizConfigReducer = (state: QuizConfigState, action: QuizConfigAction): QuizConfigState => {
-    switch (action.type) {
-      case 'SET_NUM_QUESTIONS':
-        return { ...state, numQuestions: action.payload };
-      case 'SET_CATEGORY':
-        return { ...state, category: action.payload };
-      case 'SET_DIFFICULTY':
-        return { ...state, difficulty: action.payload };
-      case 'SET_TYPE':
-        return { ...state, type: action.payload };
-      case 'SET_TIME':
-        return { ...state, time: action.payload };
-      default:
-        return state;
-    }
-  };
-
-  const initialState: QuizConfigState = {
-    numQuestions: 5,
-    category: '',
-    difficulty: '',
-    type: '',
-    time: '1m'
-  };
+const quizConfigReducer = (state: QuizConfigState, action: QuizConfigAction): QuizConfigState => {
+  switch (action.type) {
+    case 'SET_NUM_QUESTIONS':
+      return { ...state, numQuestions: action.payload };
+    case 'SET_CATEGORY':
+      return { ...state, category: action.payload };
+    case 'SET_DIFFICULTY':
+      return { ...state, difficulty: action.payload };
+    case 'SET_TYPE':
+      return { ...state, type: action.payload };
+    case 'SET_TIME':
+      return { ...state, time: action.payload };
+    default:
+      return state;
+  }
+};
+const initialState: QuizConfigState = {
+  numQuestions: 5,
+  category: '',
+  difficulty: '',
+  type: '',
+  time: '1m'
+};
 
 function QuizConfigScreen() {
   const [state, dispatch] = useReducer(quizConfigReducer, initialState);
