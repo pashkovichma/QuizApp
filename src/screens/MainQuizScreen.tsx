@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 import { mockQuizData } from '../config/mockQuizData';
 import ProgressBar from '../components/ProgressBar';
 import Timer from '../components/Timer';
@@ -35,7 +36,6 @@ function MainQuizScreen() {
   const quizTime = 60;
 
   const handleTimeUp = () => {
-    console.log("Time's up!");
     setQuizEnded(true);
   };
 
@@ -77,13 +77,10 @@ function MainQuizScreen() {
                   key={option}
                   label={option}
                   onClick={() => handleAnswerClick(option)}
-                  className={
-                    selectedAnswer === option
-                      ? isAnswerCorrect
-                        ? 'correct-answer'
-                        : 'incorrect-answer'
-                      : ''
-                  }
+                  className={classNames({
+                    'correct-answer': selectedAnswer === option && isAnswerCorrect,
+                    'incorrect-answer': selectedAnswer === option && !isAnswerCorrect,
+                  })}
                 />
               ))
             ) : (

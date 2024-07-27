@@ -65,10 +65,10 @@ export const mockQuizData = {
     },
     {
       id: 10,
-      question: "What is the capital of Russia?",
+      question: "What is the capital of Belarus?",
       type: "multiple",
-      options: ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg"],
-      correctAnswer: "Moscow"
+      options: ["Mogilev", "Minsk", "Brest", "Vitebsk"],
+      correctAnswer: "Minsk"
     },
     {
       id: 11,
@@ -126,7 +126,7 @@ export const mockQuizData = {
     },
     {
       id: 20,
-      question: "Is Moscow the capital of Russia?",
+      question: "Is Minsk the capital of Belarus?",
       type: "boolean",
       correctAnswer: "true"
     }
