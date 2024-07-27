@@ -89,13 +89,10 @@ function MainQuizScreen() {
                   key={option}
                   label={option}
                   onClick={() => handleAnswerClick(option)}
-                  className={
-                    selectedAnswer === option
-                      ? isAnswerCorrect
-                        ? 'correct-answer'
-                        : 'incorrect-answer'
-                      : ''
-                  }
+                  className={classNames({
+                      'correct-answer': selectedAnswer === option && isAnswerCorrect, // Apply 'correct-answer' if selected and correct
+                      'incorrect-answer': selectedAnswer === option && !isAnswerCorrect, // Apply 'incorrect-answer' if selected and incorrect
+                    })}
                 />
               ))
             )}
