@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import classNames from 'classnames';
 import { mockQuizData } from '../config/mockQuizData';
 import ProgressBar from '../components/ProgressBar';
 import Timer from '../components/Timer';
 import Button from '../components/Button';
+import QuizButton from '../components/QuizButton';
 import '../styles/MainQuizScreen.css';
 
 type MultipleChoiceQuestion = {
@@ -71,31 +71,21 @@ function MainQuizScreen() {
         <div className="question-container">
           <div className="question-text">{currentQuestion.question}</div>
           <div className="answer-buttons">
-            {currentQuestion.type === 'multiple' ? (
-              currentQuestion.options.map((option) => (
-                <Button
-                  key={option}
-                  label={option}
-                  onClick={() => handleAnswerClick(option)}
-                  className={classNames({
-                    'correct-answer': selectedAnswer === option && isAnswerCorrect,
-                    'incorrect-answer': selectedAnswer === option && !isAnswerCorrect,
-                  })}
-                />
-              ))
-            ) : (
-              ['true', 'false'].map((option) => (
-                <Button
-                  key={option}
-                  label={option}
-                  onClick={() => handleAnswerClick(option)}
-                  className={classNames({
-                      'correct-answer': selectedAnswer === option && isAnswerCorrect, // Apply 'correct-answer' if selected and correct
-                      'incorrect-answer': selectedAnswer === option && !isAnswerCorrect, // Apply 'incorrect-answer' if selected and incorrect
-                    })}
-                />
-              ))
-            )}
+          {currentQuestion.type === 'multiple' ? (
+            <QuizButton
+              options={currentQuestion.options}
+              selectedAnswer={selectedAnswer}
+              isAnswerCorrect={isAnswerCorrect}
+              onAnswerClick={handleAnswerClick}
+            />
+          ) : (
+            <QuizButton
+              options={['true', 'false']}
+              selectedAnswer={selectedAnswer}
+              isAnswerCorrect={isAnswerCorrect}
+              onAnswerClick={handleAnswerClick}
+            />
+          )}
           </div>
         </div>
       ) : (
