@@ -12,6 +12,7 @@ type MultipleChoiceQuestion = {
   type: 'multiple';
   options: string[];
   correctAnswer: string;
+  difficulty: string;
 };
 
 type BooleanQuestion = {
@@ -19,6 +20,7 @@ type BooleanQuestion = {
   question: string;
   type: 'boolean';
   correctAnswer: 'true' | 'false';
+  difficulty: string;
 };
 
 type Question = MultipleChoiceQuestion | BooleanQuestion;
