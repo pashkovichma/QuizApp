@@ -1,12 +1,12 @@
-import QuizConfigScreen from './screens/QuizConfigScreen';
-//import MainQuizScreen from './screens/MainQuizScreen';
+//import QuizConfigScreen from './screens/QuizConfigScreen';
+import MainQuizScreen from './screens/MainQuizScreen';
 
 function App() {
   return (
     <div className="App">
-      {/* <MainQuizScreen /> */}
+      <MainQuizScreen />
       
-      <QuizConfigScreen />
+      {/* <QuizConfigScreen /> */}
     </div>
   );
 }

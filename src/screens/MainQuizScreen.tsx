@@ -73,21 +73,12 @@ function MainQuizScreen() {
         <div className="question-container">
           <div className="question-text">{currentQuestion.question}</div>
           <div className="answer-buttons">
-          {currentQuestion.type === 'multiple' ? (
             <QuizButton
-              options={currentQuestion.options}
+              options={currentQuestion.type === 'multiple' ? currentQuestion.options : ['true', 'false']}
               selectedAnswer={selectedAnswer}
               isAnswerCorrect={isAnswerCorrect}
               onAnswerClick={handleAnswerClick}
             />
-          ) : (
-            <QuizButton
-              options={['true', 'false']}
-              selectedAnswer={selectedAnswer}
-              isAnswerCorrect={isAnswerCorrect}
-              onAnswerClick={handleAnswerClick}
-            />
-          )}
           </div>
         </div>
       ) : (
