@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { mockQuizData } from '../config/mockQuizData';
 import ProgressBar from '../components/ProgressBar';
 import Timer from '../components/Timer';
@@ -28,6 +29,7 @@ type Question = MultipleChoiceQuestion | BooleanQuestion;
 const questions: Question[] = mockQuizData.questions.slice(0, 20) as Question[]; // Take the first 20 questions
 
 function MainQuizScreen() {
+  const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
@@ -54,14 +56,15 @@ function MainQuizScreen() {
           setIsAnswerCorrect(null);
         }, 1000); // Delay before the next question
       } else {
-        // Quiz completion
-        console.log('Quiz complete!');
+        setQuizEnded(true);
+        navigate('/results');
       }
     }
   };
 
   const handleEndQuiz = () => {
     setQuizEnded(true);
+    navigate('/results');
   };
 
   return (

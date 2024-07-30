@@ -1,7 +1,10 @@
 import Button from '../components/Button';
+import { useNavigate } from 'react-router-dom';
 import '../styles/QuizResultsScreen.css';
 
 const QuizResultsScreen = () => {
+  const navigate = useNavigate();
+
   const totalQuestions = 10;
   const correctAnswers = 5;
   const quizType = 'Multiple Choice';
@@ -22,8 +25,8 @@ const QuizResultsScreen = () => {
         <p>Time Taken: {timeTaken}</p>
       </div>
       <div className="result-buttons">
-        <Button label="Restart" onClick={() => {}} className="restart-button" />
-        <Button label="Choose another quiz" onClick={() => {}} className="choose-quiz-button" />
+        <Button label="Restart" onClick={() => {navigate('/quiz');}} className="restart-button" />
+        <Button label="Choose another quiz" onClick={() => {navigate('/');}} className="choose-quiz-button" />
       </div>
     </div>
   );
