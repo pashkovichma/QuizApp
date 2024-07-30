@@ -5,6 +5,7 @@ import ProgressBar from '../components/ProgressBar';
 import Timer from '../components/Timer';
 import Button from '../components/Button';
 import QuizButton from '../components/QuizButton';
+import EndQuizModal from '../components/EndQuizModal';
 import '../styles/MainQuizScreen.css';
 
 type MultipleChoiceQuestion = {
@@ -34,6 +35,7 @@ function MainQuizScreen() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
   const [quizEnded, setQuizEnded] = useState(false);
+  const [showEndQuizModal, setShowEndQuizModal] = useState(false);
 
   const totalQuestions = questions.length;
   const currentQuestion = questions[currentQuestionIndex];
@@ -43,7 +45,21 @@ function MainQuizScreen() {
     setQuizEnded(true);
   };
 
+  const handleEndQuiz = () => {
+    setShowEndQuizModal(true);
+  };
+
+  const closeModal = () => {
+    setShowEndQuizModal(false);
+  };
+
+  const confirmEndQuiz = () => {
+    navigate('/');
+  };
+
   const handleAnswerClick = (answer: string) => {
+    if (quizEnded) return;
+
     if (currentQuestion) {
       const correct = answer === currentQuestion.correctAnswer;
       setIsAnswerCorrect(correct);
@@ -60,11 +76,6 @@ function MainQuizScreen() {
         navigate('/results');
       }
     }
-  };
-
-  const handleEndQuiz = () => {
-    setQuizEnded(true);
-    navigate('/results');
   };
 
   return (
@@ -94,12 +105,14 @@ function MainQuizScreen() {
           />
         </div>
       )}
-      {!quizEnded && (
-        <Button
-          label="End Quiz"
-          onClick={handleEndQuiz}
-          className="end-quiz-button"
-        />
+      <Button
+        label="End Quiz"
+        onClick={handleEndQuiz}
+        className="end-quiz-button"
+      />
+
+      {showEndQuizModal && (
+        <EndQuizModal onClose={closeModal} onConfirm={confirmEndQuiz} />
       )}
     </div>
   );
