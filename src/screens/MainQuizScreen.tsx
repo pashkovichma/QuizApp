@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { paths } from '../paths';
 import { mockQuizData } from '../config/mockQuizData';
 import ProgressBar from '../components/ProgressBar';
 import Timer from '../components/Timer';
@@ -54,7 +55,7 @@ function MainQuizScreen() {
   };
 
   const confirmEndQuiz = () => {
-    navigate('/');
+    navigate(paths.home);
   };
 
   const handleAnswerClick = (answer: string) => {
@@ -73,7 +74,7 @@ function MainQuizScreen() {
         }, 1000); // Delay before the next question
       } else {
         setQuizEnded(true);
-        navigate('/results');
+        navigate(paths.results);
       }
     }
   };

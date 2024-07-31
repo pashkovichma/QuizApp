@@ -2,6 +2,7 @@ import {
   createBrowserRouter, 
   RouterProvider,
 } from 'react-router-dom';
+import { paths } from './paths';
 import QuizConfigScreen from './screens/QuizConfigScreen';
 import MainQuizScreen from './screens/MainQuizScreen';
 import QuizResultsScreen from './screens/QuizResultsScreen';
@@ -9,19 +10,19 @@ import StatisticsScreen from './screens/StatisticsScreen';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: paths.home,
     element: <QuizConfigScreen />,
   },
   {
-    path: '/quiz',
+    path: paths.quiz,
     element: <MainQuizScreen />,
   },
   {
-    path: '/results',
+    path: paths.results,
     element: <QuizResultsScreen />,
   },
   {
-    path: '/statistics',
+    path: paths.statistics,
     element: <StatisticsScreen />,
   },
 ]);

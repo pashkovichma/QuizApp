@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { paths } from '../paths';
 import NumberInput from '../components/NumberInput';
 import SelectInput from '../components/SelectInput';
 import Button from '../components/Button';
@@ -49,11 +50,11 @@ function QuizConfigScreen() {
   const [state, dispatch] = useReducer(quizConfigReducer, initialState);
 
   const startQuiz = () => {
-    navigate('/quiz', { state });
+    navigate(paths.quiz, { state });
   };
 
   const seeStats = () => {
-    navigate('/statistics');
+    navigate(paths.statistics);
   };
 
   return (

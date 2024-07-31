@@ -1,5 +1,6 @@
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
+import { paths } from '../paths';
 import '../styles/QuizResultsScreen.css';
 
 const QuizResultsScreen = () => {
@@ -25,8 +26,8 @@ const QuizResultsScreen = () => {
         <p>Time Taken: {timeTaken}</p>
       </div>
       <div className="result-buttons">
-        <Button label="Restart" onClick={() => {navigate('/quiz');}} className="restart-button" />
-        <Button label="Choose another quiz" onClick={() => {navigate('/');}} className="choose-quiz-button" />
+        <Button label="Restart" onClick={() => {navigate(paths.quiz);}} className="restart-button" />
+        <Button label="Choose another quiz" onClick={() => {navigate(paths.home);}} className="choose-quiz-button" />
       </div>
     </div>
   );
