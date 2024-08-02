@@ -3,11 +3,15 @@ import Button from './Button';
 import '../styles/EndQuizModal.css';
 
 type EndQuizModalProps = {
+  active: boolean;
   onClose: () => void;
   onConfirm: () => void;
 };
 
 function EndQuizModal(props: EndQuizModalProps) {
+  if (!props.active) {
+    return null;
+  }
   return createPortal(
     <div className="modal">
       <div className="modal-content">

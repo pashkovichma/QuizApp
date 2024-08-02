@@ -111,10 +111,12 @@ function MainQuizScreen() {
         onClick={handleEndQuiz}
         className="end-quiz-button"
       />
-
-      {showEndQuizModal && (
-        <EndQuizModal onClose={closeModal} onConfirm={confirmEndQuiz} />
-      )}
+      <EndQuizModal 
+        onClose={closeModal} 
+        onConfirm={confirmEndQuiz} 
+        active={showEndQuizModal}
+      />
+      
     </div>
   );
 }
