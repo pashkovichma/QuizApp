@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { paths } from '../paths';
 import { mockQuizData } from '../config/mockQuizData';
 import ProgressBar from '../components/ProgressBar';
 import Timer from '../components/Timer';
 import Button from '../components/Button';
 import QuizButton from '../components/QuizButton';
+import EndQuizModal from '../components/EndQuizModal';
 import '../styles/MainQuizScreen.css';
 
 type MultipleChoiceQuestion = {
@@ -28,10 +31,12 @@ type Question = MultipleChoiceQuestion | BooleanQuestion;
 const questions: Question[] = mockQuizData.questions.slice(0, 20) as Question[]; // Take the first 20 questions
 
 function MainQuizScreen() {
+  const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
   const [quizEnded, setQuizEnded] = useState(false);
+  const [showEndQuizModal, setShowEndQuizModal] = useState(false);
 
   const totalQuestions = questions.length;
   const currentQuestion = questions[currentQuestionIndex];
@@ -41,7 +46,21 @@ function MainQuizScreen() {
     setQuizEnded(true);
   };
 
+  const handleEndQuiz = () => {
+    setShowEndQuizModal(true);
+  };
+
+  const closeModal = () => {
+    setShowEndQuizModal(false);
+  };
+
+  const confirmEndQuiz = () => {
+    navigate(paths.home);
+  };
+
   const handleAnswerClick = (answer: string) => {
+    if (quizEnded) return;
+
     if (currentQuestion) {
       const correct = answer === currentQuestion.correctAnswer;
       setIsAnswerCorrect(correct);
@@ -54,14 +73,10 @@ function MainQuizScreen() {
           setIsAnswerCorrect(null);
         }, 1000); // Delay before the next question
       } else {
-        // Quiz completion
-        console.log('Quiz complete!');
+        setQuizEnded(true);
+        navigate(paths.results);
       }
     }
-  };
-
-  const handleEndQuiz = () => {
-    setQuizEnded(true);
   };
 
   return (
@@ -91,13 +106,17 @@ function MainQuizScreen() {
           />
         </div>
       )}
-      {!quizEnded && (
-        <Button
-          label="End Quiz"
-          onClick={handleEndQuiz}
-          className="end-quiz-button"
-        />
-      )}
+      <Button
+        label="End Quiz"
+        onClick={handleEndQuiz}
+        className="end-quiz-button"
+      />
+      <EndQuizModal 
+        onClose={closeModal} 
+        onConfirm={confirmEndQuiz} 
+        active={showEndQuizModal}
+      />
+      
     </div>
   );
 }
