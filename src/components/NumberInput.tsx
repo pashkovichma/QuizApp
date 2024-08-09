@@ -16,6 +16,7 @@ function NumberInput(props: NumberInputProps) {
         min={props.min}
         max={props.max}
         onChange={(e) => props.onChange(Number(e.target.value))}
+        style={{ caretColor: 'transparent' }}
       />
     </div>
   );

@@ -1,9 +1,13 @@
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
+import { RootState } from '../redux/store';
 import '../styles/QuizResultsScreen.css';
+import { useSelector } from 'react-redux';
 
 const QuizResultsScreen = () => {
+  const correctAnswersAmount = useSelector((state: RootState) => state.result);
+  console.log(correctAnswersAmount);
   const navigate = useNavigate();
 
   const totalQuestions = 10;

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import Button from './Button';
 
@@ -8,10 +9,29 @@ type QuizButtonProps = {
   onAnswerClick: (answer: string) => void;
 };
 
+function shuffleArray(array: string[]) {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+}
+
 function QuizButton(props: QuizButtonProps) {
+  const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (props.options.length > 2) {
+      setShuffledOptions(shuffleArray(props.options));
+    } else {
+      setShuffledOptions(props.options);
+    }
+  }, [props.options]);
+
   return (
     <div className="answer-buttons">
-      {props.options.map((option) => (
+      {shuffledOptions.map((option) => (
         <Button
           key={option}
           label={option}
