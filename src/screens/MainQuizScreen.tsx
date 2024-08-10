@@ -42,20 +42,20 @@ function MainQuizScreen() {
       const interval = setInterval(() => {
         setTimerLocal(prevTimer => {
           const newTimer = prevTimer - 1;
-          dispatch(setTimer(newTimer)); // Обновляем таймер в store
+          dispatch(setTimer(newTimer)); 
           return newTimer;
         });
       }, 1000);
 
       return () => clearInterval(interval);
     } else {
-      handleTimeUp(); // Если время вышло, вызываем функцию завершения викторины
+      handleTimeUp(); 
     }
   }, [timer]);
 
   const handleTimeUp = () => {
     setQuizEnded(true);
-    dispatch(setTimer(0)); // Сбрасываем таймер в store при завершении викторины
+    dispatch(setTimer(0)); 
   };
 
   const handleEndQuiz = () => {
