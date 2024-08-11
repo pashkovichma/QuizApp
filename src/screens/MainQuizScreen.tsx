@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
 import ProgressBar from '../components/ProgressBar';
@@ -29,14 +29,13 @@ function MainQuizScreen() {
 
   const dispatch = useDispatch();
 
-  const timerFromStore = useSelector((state: RootState) => state.result.timer);
-
-  const [timer, setTimerLocal] = useState(timerFromStore);
-
-  useEffect(() => {
-    setTimerLocal(timerFromStore);
-  }, [timerFromStore]);
-
+  const [timer, setTimerLocal] = useState(quizTime);
+  
+  const handleTimeUp = useCallback(() => {
+    setQuizEnded(true);
+    dispatch(setTimer(0)); 
+  }, [dispatch]);
+  
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => {
@@ -50,13 +49,10 @@ function MainQuizScreen() {
       return () => clearInterval(interval);
     } else {
       handleTimeUp(); 
+      navigate(paths.results);
     }
-  }, [timer]);
+  }, [timer, dispatch, handleTimeUp, navigate]);
 
-  const handleTimeUp = () => {
-    setQuizEnded(true);
-    dispatch(setTimer(0)); 
-  };
 
   const handleEndQuiz = () => {
     setTimeout(() => setShowEndQuizModal(true), 1000);
