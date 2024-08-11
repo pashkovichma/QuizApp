@@ -17,10 +17,9 @@ function QuizConfigScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const config = useSelector((state: RootState) => state.quizConfig);
-
+  
   const startQuiz = async() => {
     await dispatch(fetchQuestions());
-    console.log(config);
     navigate(paths.quiz, { state: config });
   };
 

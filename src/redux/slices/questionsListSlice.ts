@@ -63,8 +63,6 @@ export const fetchQuestions = createAsyncThunk(
         questions = [];
     }
 
-    console.log(questions);
-
     return questions;
   }
 );

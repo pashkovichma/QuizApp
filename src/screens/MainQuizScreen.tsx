@@ -10,6 +10,7 @@ import EndQuizModal from '../components/EndQuizModal';
 import { RootState } from '../redux/store';
 import { setTimer } from '../redux/slices/resultSlice';
 import { incrementCorrectAnswers } from '../redux/slices/resultSlice';
+import { resetConfig } from '../redux/slices/quizConfigSlice';
 import '../styles/MainQuizScreen.css';
 
 function MainQuizScreen() {
@@ -60,7 +61,10 @@ function MainQuizScreen() {
 
   const closeModal = () => setShowEndQuizModal(false);
 
-  const confirmEndQuiz = () => navigate(paths.home);
+  const confirmEndQuiz = () => {
+    dispatch(resetConfig());
+    navigate(paths.home);
+  }
 
   const checkAnswer = (answer: string) => {
     if (config.type === 'Multiple Choice') {

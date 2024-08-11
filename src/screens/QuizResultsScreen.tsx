@@ -3,15 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
 import { RootState } from '../redux/store';
 import '../styles/QuizResultsScreen.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { resetConfig } from '../redux/slices/quizConfigSlice';
 
 const QuizResultsScreen = () => {
-  const correctAnswersAmount = useSelector((state: RootState) => state.result);
-  console.log(correctAnswersAmount);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const config = useSelector((state: RootState) => state.quizConfig);
   const result = useSelector((state: RootState) => state.result);
+
+  const handleRestart = () => {
+    navigate(paths.quiz);
+  };
+
+  const handleAnotherQuiz = () => {
+    dispatch(resetConfig());
+    navigate(paths.home);
+  }
 
   return (
     <div className="quiz-results-screen">
@@ -25,8 +34,16 @@ const QuizResultsScreen = () => {
         <p>Time Taken: {result.timer}s</p>
       </div>
       <div className="result-buttons">
-        <Button label="Restart" onClick={() => {navigate(paths.quiz);}} className="restart-button" />
-        <Button label="Choose another quiz" onClick={() => {navigate(paths.home);}} className="choose-quiz-button" />
+        <Button
+          label="Restart"
+          onClick={handleRestart}
+          className="restart-button"
+        />
+        <Button
+          label="Choose another quiz"
+          onClick={handleAnotherQuiz}
+          className="choose-quiz-button"
+        />
       </div>
     </div>
   );

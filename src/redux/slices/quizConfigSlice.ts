@@ -48,3 +48,4 @@ const quizConfigSlice = createSlice({
 
 export const { setNumQuestions, setCategory, setDifficulty, setType, setTime, resetConfig } = quizConfigSlice.actions;
 export default quizConfigSlice.reducer;
+export {initialState};
