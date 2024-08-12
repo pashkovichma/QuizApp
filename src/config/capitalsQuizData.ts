@@ -1,5 +1,4 @@
-export const capitalsQuizData = {
-  questions: [
+export const capitalsQuizData = [
     {
       id: 1,
       difficulty: "Easy",
@@ -271,5 +270,4 @@ export const capitalsQuizData = {
       question: "Andorra",
       options: ["Andorra la Vella", "Escaldes-Engordany", "Encamp", "La Massana"],
     }
-  ]
-};
+  ];

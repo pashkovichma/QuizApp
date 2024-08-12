@@ -5,9 +5,9 @@ import { riversQuizData } from '../../config/riversQuizData';
 
 interface Question {
   id: number;
+  difficulty: string;
   question: string;
   options: string[];
-  difficulty: string;
 }
 
 export interface QuestionsListState {
@@ -36,9 +36,13 @@ export const fetchQuestions = createAsyncThunk(
     const state = getState() as RootState;
     let questions: Question[] = [];
 
+    function filterAccordingToConfig(sourseData: Question[]) {
+      return sourseData.filter((question: Question) => question.difficulty === state.quizConfig.difficulty).splice(0, state.quizConfig.numQuestions);
+    }
+
     switch (state.quizConfig.category) {
       case 'capitals':
-        questions = capitalsQuizData.questions.filter((question: Question) => question.difficulty === state.quizConfig.difficulty).splice(0, state.quizConfig.numQuestions);
+        questions = filterAccordingToConfig(capitalsQuizData);
         switch (state.quizConfig.type) {
           case 'Multiple Choice':
             questions.map(item => item.question = `What is the capital of ${item.question}?`)
@@ -49,7 +53,7 @@ export const fetchQuestions = createAsyncThunk(
         }
         break;
       case 'rivers':
-        questions = riversQuizData.questions.filter((question: Question) => question.difficulty === state.quizConfig.difficulty).splice(0, state.quizConfig.numQuestions);
+        questions = filterAccordingToConfig(riversQuizData);
         switch (state.quizConfig.type) {
           case 'Multiple Choice':
             questions.map(item => item.question = `Which river flows through ${item.question}?`)

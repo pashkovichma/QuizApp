@@ -1,5 +1,4 @@
-export const riversQuizData = {
-  questions: [
+export const riversQuizData = [
     {
       id: 1,
       difficulty: "Easy",
@@ -270,5 +269,4 @@ export const riversQuizData = {
       question: "Los Angeles, USA",
       options: ["Los Angeles River", "Colorado", "Sacramento", "Salinas"]
     }
-  ] 
-};  
+  ];  
