@@ -1,56 +1,26 @@
-import { useReducer } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
 import NumberInput from '../components/NumberInput';
 import SelectInput from '../components/SelectInput';
 import Button from '../components/Button';
 import { categories, difficulties, types, times } from '../config/quizConfigData';
+import { RootState, AppDispatch } from '../redux/store';
+import { setNumQuestions, setCategory, setDifficulty, setType, setTime } from '../redux/slices/quizConfigSlice';
+import { fetchQuestions } from '../redux/slices/questionsListSlice';
 
-interface QuizConfigState {
-  numQuestions: number;
-  category: string;
-  difficulty: string;
-  type: string;
-  time: string;
+function timeToSeconds(time:string): number {
+  return Number(time.slice(0, -1)) * 60;
 }
-
-type QuizConfigAction =
-  { type: 'SET_NUM_QUESTIONS'; payload: number }
-  | { type: 'SET_CATEGORY'; payload: string }
-  | { type: 'SET_DIFFICULTY'; payload: string }
-  | { type: 'SET_TYPE'; payload: string }
-  | { type: 'SET_TIME'; payload: string };
-
-const quizConfigReducer = (state: QuizConfigState, action: QuizConfigAction): QuizConfigState => {
-  switch (action.type) {
-    case 'SET_NUM_QUESTIONS':
-      return { ...state, numQuestions: action.payload };
-    case 'SET_CATEGORY':
-      return { ...state, category: action.payload };
-    case 'SET_DIFFICULTY':
-      return { ...state, difficulty: action.payload };
-    case 'SET_TYPE':
-      return { ...state, type: action.payload };
-    case 'SET_TIME':
-      return { ...state, time: action.payload };
-    default:
-      return state;
-  }
-};
-const initialState: QuizConfigState = {
-  numQuestions: 5,
-  category: '',
-  difficulty: '',
-  type: '',
-  time: '1m'
-};
 
 function QuizConfigScreen() {
   const navigate = useNavigate();
-  const [state, dispatch] = useReducer(quizConfigReducer, initialState);
-
-  const startQuiz = () => {
-    navigate(paths.quiz, { state });
+  const dispatch = useDispatch<AppDispatch>();
+  const config = useSelector((state: RootState) => state.quizConfig);
+  
+  const startQuiz = async() => {
+    await dispatch(fetchQuestions());
+    navigate(paths.quiz, { state: config });
   };
 
   const seeStats = () => {
@@ -62,34 +32,34 @@ function QuizConfigScreen() {
       <h1>Quiz Configuration</h1>
       <NumberInput
         label="Number of Questions"
-        value={state.numQuestions}
+        value={config.numQuestions}
         min={5}
         max={15}
-        onChange={(value) => dispatch({ type: 'SET_NUM_QUESTIONS', payload: value })}
+        onChange={(value) => dispatch(setNumQuestions(value))}
       />
       <SelectInput
         label="Category"
         options={categories}
-        value={state.category}
-        onChange={(value) => dispatch({ type: 'SET_CATEGORY', payload: value })}
+        value={config.category}
+        onChange={(value) => dispatch(setCategory(value))}
       />
       <SelectInput
         label="Difficulty"
         options={difficulties}
-        value={state.difficulty}
-        onChange={(value) => dispatch({ type: 'SET_DIFFICULTY', payload: value })}
+        value={config.difficulty}
+        onChange={(value) => dispatch(setDifficulty(value))}
       />
       <SelectInput
         label="Type"
         options={types}
-        value={state.type}
-        onChange={(value) => dispatch({ type: 'SET_TYPE', payload: value })}
+        value={config.type}
+        onChange={(value) => dispatch(setType(value))}
       />
       <SelectInput
         label="Time"
         options={times}
-        value={state.time}
-        onChange={(value) => dispatch({ type: 'SET_TIME', payload: value })}
+        value={config.time}
+        onChange={(value) => dispatch(setTime(timeToSeconds(value)))}
       />
       <Button 
         label="Start Quiz"

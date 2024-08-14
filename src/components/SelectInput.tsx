@@ -1,7 +1,7 @@
 type SelectInputProps = {
   label: string;
   options: string[];
-  value: string;
+  value: string | number;
   onChange: (value: string) => void;
 };
 

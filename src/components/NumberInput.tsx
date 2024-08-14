@@ -1,3 +1,5 @@
+import '../styles/NumberInput.css';
+
 type NumberInputProps = {
   label: string;
   value: number;
@@ -16,6 +18,7 @@ function NumberInput(props: NumberInputProps) {
         min={props.min}
         max={props.max}
         onChange={(e) => props.onChange(Number(e.target.value))}
+        className="transparent-caret"
       />
     </div>
   );
