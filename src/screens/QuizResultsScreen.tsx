@@ -1,10 +1,12 @@
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { paths } from '../paths';
 import { RootState } from '../redux/store';
 import '../styles/QuizResultsScreen.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetConfig } from '../redux/slices/quizConfigSlice';
+import { refreshStatistics } from '../redux/slices/statisticsSlice.ts'
 
 const QuizResultsScreen = () => {
   const dispatch = useDispatch();
@@ -12,6 +14,14 @@ const QuizResultsScreen = () => {
 
   const config = useSelector((state: RootState) => state.quizConfig);
   const result = useSelector((state: RootState) => state.result);
+  const statistics = useSelector((state: RootState) => state.statistics);
+
+  const questions = useSelector((state: RootState) => state.questionsList.questionsList);
+  const currentQuestionAmount = questions.length;
+  const currentCorrectAnswers = result.correctAnswers;
+  const category = config.category;
+  const difficulty = config.difficulty;
+  const type = config.type;
 
   const handleRestart = () => {
     navigate(paths.quiz);
@@ -22,7 +32,18 @@ const QuizResultsScreen = () => {
     navigate(paths.home);
   }
 
-  return (
+  useEffect(() => {
+    dispatch(refreshStatistics({
+      currentQuestionAmount,
+      currentCorrectAnswers,
+      category,
+      difficulty,
+      type
+    }));
+}, [currentQuestionAmount, currentCorrectAnswers, category, difficulty, type, dispatch]);
+console.log(statistics);
+  
+return (
     <div className="quiz-results-screen">
       <h1>Thank you for completing this quiz. Here are your results:</h1>
       <div className="result-summary">
