@@ -67,7 +67,7 @@ function MainQuizScreen() {
   }
 
   const checkAnswer = (answer: string) => {
-    if (config.type === 'Multiple Choice') {
+    if (config.type === 'multipleChoice') {
       return answer === currentQuestion.options[0];
     } else {
       return (answer === 'true' && currentQuestion.question.includes(currentQuestion.options[0])) ||
@@ -105,7 +105,7 @@ return (
         <div className="question-text">{currentQuestion.question}</div>
         <div className="answer-buttons">
           <QuizButton
-            options={config.type === 'Multiple Choice' ? currentQuestion.options : ['true', 'false']}
+            options={config.type === 'multipleChoice' ? currentQuestion.options : ['true', 'false']}
             selectedAnswer={selectedAnswer}
             isAnswerCorrect={isAnswerCorrect}
             onAnswerClick={handleAnswerClick}

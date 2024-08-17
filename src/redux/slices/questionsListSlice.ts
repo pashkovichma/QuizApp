@@ -44,10 +44,10 @@ export const fetchQuestions = createAsyncThunk(
       case 'capitals':
         questions = filterAccordingToConfig(capitalsQuizData);
         switch (state.quizConfig.type) {
-          case 'Multiple Choice':
+          case 'multipleChoice':
             questions.map(item => item.question = `What is the capital of ${item.question}?`)
             break;
-          case 'True/False':
+          case 'trueFalse':
             questions.map(item => item.question = `Is ${item.options[getRandomNumber()]} the capital of ${item.question}?`)
             break;
         }
@@ -55,10 +55,10 @@ export const fetchQuestions = createAsyncThunk(
       case 'rivers':
         questions = filterAccordingToConfig(riversQuizData);
         switch (state.quizConfig.type) {
-          case 'Multiple Choice':
+          case 'multipleChoice':
             questions.map(item => item.question = `Which river flows through ${item.question}?`)
             break;
-          case 'True/False':
+          case 'trueFalse':
             questions.map(item => item.question = `Is ${item.options[getRandomNumber()]} flows through ${item.question}?`)
             break;
         }

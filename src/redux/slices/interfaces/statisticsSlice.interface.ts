@@ -47,3 +47,25 @@ export interface StatisticsPayload {
   category: keyof Categories,
   type: keyof Types
 }
+
+
+export interface CategoriesPayload {
+  correctAnswers: number,
+  category: CategoryKeys,
+}
+
+export type CategoryKeys = 'capitals' | 'rivers';
+
+export interface DifficultiesPayload {
+  correctAnswers: number, 
+  difficulty: DifficultyKeys,
+}
+
+export type DifficultyKeys = 'easy' | 'medium' | 'hard';
+
+export interface TypesPayload {
+  correctAnswers: number,
+  type: TypeKeys,
+}
+
+export type TypeKeys = 'multipleChoice' | 'trueFalse';

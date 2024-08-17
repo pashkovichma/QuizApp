@@ -1,12 +1,19 @@
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { paths } from '../paths';
 import { RootState } from '../redux/store';
 import '../styles/QuizResultsScreen.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetConfig } from '../redux/slices/quizConfigSlice';
-import { refreshStatistics } from '../redux/slices/statisticsSlice.ts'
+import { setTotalQuestions, 
+  setTotalCorrectAnswers, 
+  setTotalCorrectAnswersByCategories,
+  setTotalCorrectAnswersByDifficulties,
+  setTotalCorrectAnswersByTypes,
+} from '../redux/slices/statisticsSlice.ts'
+import { resetCorrectAnswers } from '../redux/slices/resultSlice.ts';
+import { DifficultyKeys, TypeKeys } from '../redux/slices/interfaces/statisticsSlice.interface.ts';
 
 const QuizResultsScreen = () => {
   const dispatch = useDispatch();
@@ -16,31 +23,42 @@ const QuizResultsScreen = () => {
   const result = useSelector((state: RootState) => state.result);
   const statistics = useSelector((state: RootState) => state.statistics);
 
-  const questions = useSelector((state: RootState) => state.questionsList.questionsList);
-  const currentQuestionAmount = questions.length;
-  const currentCorrectAnswers = result.correctAnswers;
-  const category = config.category;
-  const difficulty = config.difficulty;
-  const type = config.type;
-
   const handleRestart = () => {
     navigate(paths.quiz);
+    dispatch(resetCorrectAnswers());
   };
 
   const handleAnotherQuiz = () => {
     dispatch(resetConfig());
     navigate(paths.home);
+    dispatch(resetCorrectAnswers());
   }
 
-  useEffect(() => {
-    dispatch(refreshStatistics({
-      currentQuestionAmount,
-      currentCorrectAnswers,
-      category,
-      difficulty,
-      type
+console.log(config.numQuestions);
+
+console.log(statistics);
+const hasDispatched = useRef(false); 
+useEffect(() => {
+  if (!hasDispatched.current) {
+    dispatch(setTotalQuestions(config.numQuestions));
+    dispatch(setTotalCorrectAnswers(result.correctAnswers));
+    dispatch(setTotalCorrectAnswersByCategories({
+      correctAnswers: result.correctAnswers, 
+      category: config.category
     }));
-}, [currentQuestionAmount, currentCorrectAnswers, category, difficulty, type, dispatch]);
+    dispatch(setTotalCorrectAnswersByDifficulties({
+      correctAnswers: result.correctAnswers,
+      difficulty: config.difficulty as DifficultyKeys
+    })); 
+    dispatch(setTotalCorrectAnswersByTypes({
+      correctAnswers: result.correctAnswers,
+      type: config.type as TypeKeys
+    }));
+  
+    hasDispatched.current = true;
+  }
+}, [dispatch, config.numQuestions, config.category, config.difficulty, config.type, result.correctAnswers]); 
+
 console.log(statistics);
   
 return (

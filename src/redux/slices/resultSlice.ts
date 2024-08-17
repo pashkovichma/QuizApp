@@ -30,9 +30,12 @@ const resultSlice = createSlice({
     resetTimer(state) {
       state.timer = 0;
     },
+    resetCorrectAnswers(state) {
+      state.correctAnswers = 0;
+    },
     updatePerformance(state) {
       state.totalQuizzes++;
-      state.averageScore = state.correctAnswers / state.totalQuizzes; // Simple average calculation
+      state.averageScore = state.correctAnswers / state.totalQuizzes;
     },
   }
 });
@@ -40,6 +43,7 @@ const resultSlice = createSlice({
 export const { 
   incrementCorrectAnswers, 
   setTimer, 
-  resetTimer } = resultSlice.actions;
+  resetTimer, 
+  resetCorrectAnswers } = resultSlice.actions;
 export default resultSlice.reducer;
 export type { ExtendedResultState };
