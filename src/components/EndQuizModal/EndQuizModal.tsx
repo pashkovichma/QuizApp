@@ -1,12 +1,7 @@
 import { createPortal } from 'react-dom';
-import Button from './Button';
-import '../styles/EndQuizModal.css';
-
-type EndQuizModalProps = {
-  active: boolean;
-  onClose: () => void;
-  onConfirm: () => void;
-};
+import Button from '../Button/Button';
+import { EndQuizModalProps } from './endQuizModal.interface';
+import '../../styles/EndQuizModal.css';
 
 function EndQuizModal(props: EndQuizModalProps) {
   if (!props.active) {

@@ -1,4 +1,4 @@
-import Button from '../components/Button';
+import Button from '../components/Button/Button.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import { paths } from '../paths';

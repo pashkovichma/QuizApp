@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import Button from './Button';
-
-type QuizButtonProps = {
-  options: string[];
-  selectedAnswer: string | null;
-  isAnswerCorrect: boolean | null;
-  onAnswerClick: (answer: string) => void;
-};
+import Button from '../Button/Button';
+import { QuizButtonProps } from './quizButton.interface';
 
 function shuffleArray<T>(array: T[]): T[] {
   return array

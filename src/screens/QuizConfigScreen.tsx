@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
-import NumberInput from '../components/NumberInput';
-import SelectInput from '../components/SelectInput';
-import Button from '../components/Button';
+import NumberInput from '../components/NumberInput/NumberInput';
+import SelectInput from '../components/SelectInput/SelectInput';
+import Button from '../components/Button/Button';
 import { categories, difficulties, types, times } from '../config/quizConfigData';
 import { RootState, AppDispatch } from '../redux/store';
 import { setNumQuestions, setCategory, setDifficulty, setType, setTime } from '../redux/slices/quizConfigSlice';
