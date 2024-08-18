@@ -8,6 +8,7 @@ import { categories, difficulties, types, times } from '../config/quizConfigData
 import { RootState, AppDispatch } from '../redux/store';
 import { setNumQuestions, setCategory, setDifficulty, setType, setTime } from '../redux/slices/quizConfigSlice';
 import { fetchQuestions } from '../redux/slices/questionsListSlice';
+import { CategoryKeys } from '../redux/slices/interfaces/statisticsSlice.interface';
 
 function timeToSeconds(time:string): number {
   return Number(time.slice(0, -1)) * 60;
@@ -41,7 +42,7 @@ function QuizConfigScreen() {
         label="Category"
         options={categories}
         value={config.category}
-        onChange={(value) => dispatch(setCategory(value))}
+        onChange={(value) => dispatch(setCategory(value as CategoryKeys))}
       />
       <SelectInput
         label="Difficulty"

@@ -34,6 +34,12 @@ const QuizResultsScreen = () => {
     dispatch(resetCorrectAnswers());
   }
 
+  const handleStatistics = () => {
+    dispatch(resetConfig());
+    navigate(paths.statistics);
+    dispatch(resetCorrectAnswers());
+  }
+
 console.log(config.numQuestions);
 
 console.log(statistics);
@@ -63,25 +69,30 @@ console.log(statistics);
   
 return (
     <div className="quiz-results-screen">
-      <h1>Thank you for completing this quiz. Here are your results:</h1>
-      <div className="result-summary">
-        <p>You answered {result.correctAnswers} out of {config.numQuestions} questions correctly.</p>
-        <p>Quiz Type: {config.type}</p>
-        <p>Category: {config.category}</p>
-        <p>Total Time: {config.time}s</p>
-        <p>Difficulty: {config.difficulty}</p>
-        <p>Time Taken: {result.timer}s</p>
+      <h1 className="results-header">Thank you for completing this quiz. Here are your results:</h1>
+      <div className="results-container">
+        <p className="results-text">You answered {result.correctAnswers} out of {config.numQuestions} questions correctly.</p>
+        <p className="results-text">Quiz Type: {config.type}</p>
+        <p className="results-text">Category: {config.category}</p>
+        <p className="results-text">Total Time: {config.time}s</p>
+        <p className="results-text">Difficulty: {config.difficulty}</p>
+        <p className="results-text">Time Taken: {result.timer}s</p>
       </div>
       <div className="result-buttons">
         <Button
           label="Restart"
           onClick={handleRestart}
-          className="restart-button"
+          className="result-button"
         />
         <Button
           label="Choose another quiz"
           onClick={handleAnotherQuiz}
-          className="choose-quiz-button"
+          className="result-button"
+        />
+        <Button
+          label="Show statistics"
+          onClick={handleStatistics}
+          className="result-button"
         />
       </div>
     </div>

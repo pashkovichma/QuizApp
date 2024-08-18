@@ -40,15 +40,6 @@ export const initialStatistics: Statistics = {
   }
 };
 
-export interface StatisticsPayload {
-  questions: number,
-  correctAnswers: number,
-  difficulty: keyof Difficulties,
-  category: keyof Categories,
-  type: keyof Types
-}
-
-
 export interface CategoriesPayload {
   correctAnswers: number,
   category: CategoryKeys,

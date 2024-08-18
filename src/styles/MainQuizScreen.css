@@ -50,3 +50,18 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.end-quiz-button {
+  background-color: #1e88e5;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.end-quiz-button:hover {
+  background-color: #1976d2;
+}

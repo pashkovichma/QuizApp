@@ -1,4 +1,4 @@
-.quiz-results-screen {
+.statistics-screen {
   background: #ffffff;
   padding: 20px;
   border-radius: 10px;
@@ -8,25 +8,30 @@
   margin: auto;
 }
 
-.results-container {
-  margin-top: 20px;
-}
-
-.results-header {
+.statistics-header {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-.results-text {
+.statistics-text {
   font-size: 18px;
   margin-bottom: 15px;
 }
 
-.result-buttons {
-  margin-top: 30px;
+.statistics-section {
+  margin-top: 20px;
+  text-align: left;
 }
 
-.result-button {
+.statistics-list {
+  list-style-type: none;
+}
+
+.statistics-list-item {
+  margin-bottom: 10px;
+}
+
+.another-quiz-button {
   background-color: #1e88e5;
   color: white;
   padding: 10px;
@@ -37,6 +42,6 @@
   margin: 10px;
 }
 
-.result-button:hover {
+.another-quiz-button :hover {
   background-color: #1976d2; 
 }
