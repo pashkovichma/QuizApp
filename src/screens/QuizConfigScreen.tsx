@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
-import NumberInput from '../components/NumberInput';
-import SelectInput from '../components/SelectInput';
-import Button from '../components/Button';
+import NumberInput from '../components/NumberInput/NumberInput';
+import SelectInput from '../components/SelectInput/SelectInput';
+import Button from '../components/Button/Button';
 import { categories, difficulties, types, times } from '../config/quizConfigData';
 import { RootState, AppDispatch } from '../redux/store';
 import { setNumQuestions, setCategory, setDifficulty, setType, setTime } from '../redux/slices/quizConfigSlice';
 import { fetchQuestions } from '../redux/slices/questionsListSlice';
+import { CategoryKeys } from '../redux/slices/interfaces/statisticsSlice.interface';
 
 function timeToSeconds(time:string): number {
   return Number(time.slice(0, -1)) * 60;
@@ -41,7 +42,7 @@ function QuizConfigScreen() {
         label="Category"
         options={categories}
         value={config.category}
-        onChange={(value) => dispatch(setCategory(value))}
+        onChange={(value) => dispatch(setCategory(value as CategoryKeys))}
       />
       <SelectInput
         label="Difficulty"

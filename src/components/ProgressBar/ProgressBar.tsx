@@ -1,9 +1,5 @@
-import '../styles/ProgressBar.css';
-
-type ProgressBarProps = {
-  current: number;
-  total: number;
-}
+import '../../styles/ProgressBar.css';
+import { ProgressBarProps } from './progressBar.interface';
 
 function ProgressBar(props: ProgressBarProps) {
   const percentage = Math.round((props.current / props.total) * 100);

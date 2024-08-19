@@ -1,12 +1,5 @@
-import '../styles/NumberInput.css';
-
-type NumberInputProps = {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  onChange: (value: number) => void;
-};
+import '../../styles/NumberInput.css';
+import { NumberInputProps } from './numberInput.interface.ts';
 
 function NumberInput(props: NumberInputProps) {
   return (

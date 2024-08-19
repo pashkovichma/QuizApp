@@ -5,9 +5,16 @@ export interface ResultState {
   timer: number;
 }
 
-const initialState: ResultState = {
+interface ExtendedResultState extends ResultState {
+  totalQuizzes: number;
+  averageScore: number;
+}
+
+const initialState: ExtendedResultState = {
   correctAnswers: 0,
   timer: 0,
+  totalQuizzes: 0,
+  averageScore: 0,
 }
 
 const resultSlice = createSlice({
@@ -22,12 +29,21 @@ const resultSlice = createSlice({
     },
     resetTimer(state) {
       state.timer = 0;
-    }
+    },
+    resetCorrectAnswers(state) {
+      state.correctAnswers = 0;
+    },
+    updatePerformance(state) {
+      state.totalQuizzes++;
+      state.averageScore = state.correctAnswers / state.totalQuizzes;
+    },
   }
 });
 
 export const { 
   incrementCorrectAnswers, 
   setTimer, 
-  resetTimer } = resultSlice.actions;
+  resetTimer, 
+  resetCorrectAnswers } = resultSlice.actions;
 export default resultSlice.reducer;
+export type { ExtendedResultState };

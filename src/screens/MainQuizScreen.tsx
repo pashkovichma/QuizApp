@@ -2,11 +2,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
-import ProgressBar from '../components/ProgressBar';
-import Timer from '../components/Timer';
-import Button from '../components/Button';
-import QuizButton from '../components/QuizButton';
-import EndQuizModal from '../components/EndQuizModal';
+import ProgressBar from '../components/ProgressBar/ProgressBar';
+import Timer from '../components/Timer/Timer';
+import Button from '../components/Button/Button';
+import QuizButton from '../components/QuizButton/QuizButton';
+import EndQuizModal from '../components/EndQuizModal/EndQuizModal';
 import { RootState } from '../redux/store';
 import { setTimer } from '../redux/slices/resultSlice';
 import { incrementCorrectAnswers } from '../redux/slices/resultSlice';
@@ -67,7 +67,7 @@ function MainQuizScreen() {
   }
 
   const checkAnswer = (answer: string) => {
-    if (config.type === 'Multiple Choice') {
+    if (config.type === 'multipleChoice') {
       return answer === currentQuestion.options[0];
     } else {
       return (answer === 'true' && currentQuestion.question.includes(currentQuestion.options[0])) ||
@@ -105,10 +105,10 @@ return (
         <div className="question-text">{currentQuestion.question}</div>
         <div className="answer-buttons">
           <QuizButton
-            options={config.type === 'Multiple Choice' ? currentQuestion.options : ['true', 'false']}
+            options={config.type === 'multipleChoice' ? currentQuestion.options : ['true', 'false']}
             selectedAnswer={selectedAnswer}
             isAnswerCorrect={isAnswerCorrect}
-            onAnswerClick={handleAnswerClick}
+            onChange={handleAnswerClick}
           />
         </div>
       </div>

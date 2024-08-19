@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-
-type TimerProps = {
-  time: number;
-  onTimeUp: () => void;
-}
+import { TimerProps } from './timer.interface';
 
 function Timer({ time, onTimeUp }: TimerProps) {
   const [timer, setTimer] = useState(time);
