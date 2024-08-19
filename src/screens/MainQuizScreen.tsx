@@ -108,7 +108,7 @@ return (
             options={config.type === 'multipleChoice' ? currentQuestion.options : ['true', 'false']}
             selectedAnswer={selectedAnswer}
             isAnswerCorrect={isAnswerCorrect}
-            onAnswerClick={handleAnswerClick}
+            onChange={handleAnswerClick}
           />
         </div>
       </div>

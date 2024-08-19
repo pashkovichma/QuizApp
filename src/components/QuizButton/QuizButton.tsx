@@ -27,7 +27,7 @@ function QuizButton(props: QuizButtonProps) {
         <Button
           key={option}
           label={option}
-          onClick={() => props.onAnswerClick(option)}
+          onClick={() => props.onChange(option)}
           className={classNames({
             'correct-answer': props.selectedAnswer === option && props.isAnswerCorrect,
             'incorrect-answer': props.selectedAnswer === option && !props.isAnswerCorrect,

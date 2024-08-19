@@ -1,6 +1,6 @@
-export interface SelectInputProps {
+import { BaseOptionsProps } from "../base.interface";
+
+export interface SelectInputProps extends BaseOptionsProps {
   label: string;
-  options: string[];
   value: string | number;
-  onChange: (value: string) => void;
 }
