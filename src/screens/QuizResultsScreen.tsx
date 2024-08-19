@@ -21,8 +21,7 @@ const QuizResultsScreen = () => {
 
   const config = useSelector((state: RootState) => state.quizConfig);
   const result = useSelector((state: RootState) => state.result);
-  const statistics = useSelector((state: RootState) => state.statistics);
-
+  
   const handleRestart = () => {
     navigate(paths.quiz);
     dispatch(resetCorrectAnswers());
@@ -39,10 +38,6 @@ const QuizResultsScreen = () => {
     navigate(paths.statistics);
     dispatch(resetCorrectAnswers());
   }
-
-console.log(config.numQuestions);
-
-console.log(statistics);
 const hasDispatched = useRef(false); 
 useEffect(() => {
   if (!hasDispatched.current) {
@@ -65,8 +60,6 @@ useEffect(() => {
   }
 }, [dispatch, config.numQuestions, config.category, config.difficulty, config.type, result.correctAnswers]); 
 
-console.log(statistics);
-  
 return (
     <div className="quiz-results-screen">
       <h1 className="results-header">Thank you for completing this quiz. Here are your results:</h1>
