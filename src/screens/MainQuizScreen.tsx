@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../paths';
 import ProgressBar from '../components/ProgressBar/ProgressBar';
@@ -104,12 +105,19 @@ return (
       <div className="question-container">
         <div className="question-text">{currentQuestion.question}</div>
         <div className="answer-buttons">
-          <QuizButton
-            options={config.type === 'multipleChoice' ? currentQuestion.options : ['true', 'false']}
-            selectedAnswer={selectedAnswer}
-            isAnswerCorrect={isAnswerCorrect}
-            onChange={handleAnswerClick}
-          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            exit={{ opacity: 0, scale: 0.8 }} 
+            transition={{ duration: 0.9 }} 
+          >
+            <QuizButton
+              options={config.type === 'multipleChoice' ? currentQuestion.options : ['true', 'false']}
+              selectedAnswer={selectedAnswer}
+              isAnswerCorrect={isAnswerCorrect}
+              onChange={handleAnswerClick}
+            />
+          </motion.div> 
         </div>
       </div>
     ) : (
